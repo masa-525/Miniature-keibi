@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>HTML/CSS 1ファイル構成</title>
-    <style>
-        /* ここにCSSを記述する */
-        body {
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+<h2>荒らし報告</h2>
+<div id="report"></div>
 
-        /* ここにHTMLを記述する */
+<script>
 
-    <h1>こんにちは</h1>
-</body>
-</html>
+fetch("https://api.github.com/repos/masa-525/Miniature-keibi/issues")
+.then(r=>r.json())
+.then(data=>{
+
+ let html=""
+
+ data.forEach(i=>{
+   html+=`
+   <div style="border:1px solid #ccc;margin:10px;padding:10px;">
+   <h3>${i.title}</h3>
+   <pre>${i.body}</pre>
+   </div>
+   `
+ })
+
+ document.getElementById("report").innerHTML=html
+
+})
+
+</script>
